@@ -1,0 +1,22 @@
+
+    .panel {
+		width: 80%;
+	}
+
+	.list-group-item{
+		padding: 0;
+	}
+
+	.media-left {
+		border-right: 1px solid #ddd;
+		padding: 10px;
+	}
+
+	.media-body {
+		padding: 10px;
+	}
+
+	.time-slot {
+		width: 75px;
+    	display: inline-block;
+	}

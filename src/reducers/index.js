@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import CitiesReducer from './reducer_cities'; 
+import AppointmentsReducer from './reducer_appointments'; 
+import SelectedAppointmentReducer from './reducer_selected_appointment'
 
 const rootReducer = combineReducers({
-	appointments: CitiesReducer
+	appointments: AppointmentsReducer,
+	selectedAppointment: SelectedAppointmentReducer
 });
 
 export default rootReducer;
