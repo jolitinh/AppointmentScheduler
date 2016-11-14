@@ -2,7 +2,7 @@ import React from 'react';
 
 const AppointmentDetails = ({appointment, selectAppointment}) => {
 	return (
-		<a href="#" className="list-group-item" onClick={() => {
+		<a href="#" className={"list-group-item " + (appointment.name  ?  'list-group-item-danger' : '')} onClick={() => {
 			$('#appointmentModal').modal('toggle');
 			selectAppointment(appointment);
 		} }>
