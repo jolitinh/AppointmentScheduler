@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { updateAppointment } from '../actions/index';
 
 class SelectedAppointment extends Component {
 	constructor(props){
@@ -15,6 +16,7 @@ class SelectedAppointment extends Component {
 
 		this.onNameChange = this.onNameChange.bind(this);
 		this.onPhoneNumberChange = this.onPhoneNumberChange.bind(this);
+		this.onSaveChanges = this.onSaveChanges.bind(this);
 	}
 
 	onNameChange(event){
@@ -29,6 +31,16 @@ class SelectedAppointment extends Component {
 		})
 	}
 
+	onSaveChanges(event){
+		let editedAppointment = {
+			time: this.state.time,
+			name: this.state.name,
+			phoneNumber: this.state.phoneNumber
+		};
+		
+		this.props.updateAppointment(editedAppointment)
+	}
+
 	render () {
 		if (!this.props.appointment) {
 			return <div>Select an appointment to get started.</div>;
@@ -40,7 +52,7 @@ class SelectedAppointment extends Component {
 				  <div className="modal-dialog" role="document">
 				    <div className="modal-content">
 				      <div className="modal-header">
-				      	{this.props.appointment.time} {this.state.phoneNumber} | {this.state.name}
+				      	{this.props.appointment.time}
 				        <button type="button" className="close" data-dismiss="modal"></button>
 				        <h4 className="modal-title" id="myModalLabel"></h4>
 				      </div>
@@ -60,20 +72,10 @@ class SelectedAppointment extends Component {
 				      </div>
 				      <div className="modal-footer">
 				        <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-				        <button type="button" className="btn btn-primary">Save changes</button>
+				        <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.onSaveChanges}>Save changes</button>
 				      </div>
 				    </div>
 				  </div>
-				</div>
-				<div>
-					<div className="panel panel-default center-block">
-						<div className="panel-heading">
-							<h3 className="panel-title">Selected Appointment</h3>
-						</div>
-						<div>Time: {this.props.appointment.time}</div>
-						<div>Name: {this.props.appointment.name}</div>
-						<div>Phone Number: {this.props.appointment.phoneNumber}</div>
-					</div>
 				</div>
 			</div>
 		);
@@ -87,10 +89,11 @@ class SelectedAppointment extends Component {
 		if (nextProps.appointment.name !== this.state.name) {
 			this.setState({ name: nextProps.appointment.name });
 		}
+
+		this.setState({ time: nextProps.appointment.time });
 	}
 
 }
-
 
 function mapStateToProps(state){
 	return {
@@ -98,4 +101,8 @@ function mapStateToProps(state){
 	}
 }
 
-export default connect(mapStateToProps)(SelectedAppointment);
+function mapDispatchToProps(dispatch){
+	return bindActionCreators({updateAppointment}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectedAppointment);

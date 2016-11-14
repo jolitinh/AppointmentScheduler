@@ -1,5 +1,5 @@
-export default function() {
-	return  [{
+export default function(currentState = null, action) {
+	let initialState =  [{
 			"time": "09:00am"
 		}, {
 			"time": "10:00am"
@@ -21,4 +21,19 @@ export default function() {
 			"time": "05:00pm"
 		}
 	]
+
+	switch(action.type){
+		case 'UPDATE_APPOINTMENT':
+			let newAppointmentCollection = currentState.slice();
+			let elementIndex = newAppointmentCollection.findIndex(appointment => appointment.time === action.data.time)
+			newAppointmentCollection[elementIndex].name = action.data.name;
+			newAppointmentCollection[elementIndex].phoneNumber = action.data.phoneNumber;
+			return newAppointmentCollection;
+		break;
+		case '@@redux/INIT':
+			return initialState;
+		break;
+	}
+
+	return currentState;
 }

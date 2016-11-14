@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import AppointmentDetails from '../components/appointment_details';
 import { connect } from 'react-redux';
-import { selectAppointment } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import { selectAppointment } from '../actions/index';
 
 
 class AppointmentList extends Component {
