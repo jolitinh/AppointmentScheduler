@@ -1,4 +1,4 @@
-# Appointment Scheduler (WIP)
+# Appointment Scheduler
 
 ###Getting Started###
 
