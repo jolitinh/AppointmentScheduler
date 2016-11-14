@@ -3,6 +3,32 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 class SelectedAppointment extends Component {
+	constructor(props){
+		super(props);
+
+		this.state = {
+			time: '',
+			name: '',
+			phoneNumber: ''
+
+		};
+
+		this.onNameChange = this.onNameChange.bind(this);
+		this.onPhoneNumberChange = this.onPhoneNumberChange.bind(this);
+	}
+
+	onNameChange(event){
+		this.setState({
+			name: event.target.value
+		})
+	}
+
+	onPhoneNumberChange(event){
+		this.setState({
+			phoneNumber: event.target.value
+		})
+	}
+
 	render () {
 		if (!this.props.appointment) {
 			return <div>Select an appointment to get started.</div>;
@@ -14,7 +40,7 @@ class SelectedAppointment extends Component {
 				  <div className="modal-dialog" role="document">
 				    <div className="modal-content">
 				      <div className="modal-header">
-				      	{this.props.appointment.time}
+				      	{this.props.appointment.time} {this.state.phoneNumber} | {this.state.name}
 				        <button type="button" className="close" data-dismiss="modal"></button>
 				        <h4 className="modal-title" id="myModalLabel"></h4>
 				      </div>
@@ -22,12 +48,12 @@ class SelectedAppointment extends Component {
 				        <form>
 				          <div className="form-group">
 				            <label htmlFor="appointment-name" className="control-label">Name:</label>
-				            <input type="text" className="form-control" id="appointment-name" value={this.props.appointment.name}/>
+				            <input type="text" className="form-control" id="appointment-name" value={this.state.name} onChange={this.onNameChange}/>
 				          </div>
 				          <div className="form-group">
 				          	<div className="form-group">
 					            <label htmlFor="appointment-phone" className="control-label">Phone Number:</label>
-					            <input type="text" className="form-control" id="appointment-phone" value={this.props.appointment.phoneNumber}/>
+					            <input type="text" className="form-control" id="appointment-phone" value={this.state.phoneNumber} onChange={this.onPhoneNumberChange}/>
 				          </div>
 				          </div>
 				        </form>
@@ -52,6 +78,17 @@ class SelectedAppointment extends Component {
 			</div>
 		);
 	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.appointment.phoneNumber !== this.state.phoneNumber) {
+			this.setState({ phoneNumber: nextProps.appointment.phoneNumber });
+		}
+
+		if (nextProps.appointment.name !== this.state.name) {
+			this.setState({ name: nextProps.appointment.name });
+		}
+	}
+
 }
 
 
