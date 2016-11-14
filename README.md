@@ -21,3 +21,5 @@ Click [here](https://github.com/jolitinh/AppointmentScheduler) then download the
 	> npm install
 	> npm start
 ```
+
+Once the server is running, navigate to http://localhost:8080
