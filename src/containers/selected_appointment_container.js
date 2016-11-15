@@ -42,17 +42,13 @@ class SelectedAppointment extends Component {
 	}
 
 	render () {
-		if (!this.props.appointment) {
-			return <div>Select an appointment to get started.</div>;
-		}
-
 		return (
 			<div>
 				<div className="modal fade" id="appointmentModal" tabIndex="-1" role="dialog">
 				  <div className="modal-dialog" role="document">
 				    <div className="modal-content">
 				      <div className="modal-header">
-				      	{this.props.appointment.time}
+				      	{(this.props.appointment ? this.props.appointment.time : '')}
 				        <button type="button" className="close" data-dismiss="modal"></button>
 				        <h4 className="modal-title" id="myModalLabel"></h4>
 				      </div>
