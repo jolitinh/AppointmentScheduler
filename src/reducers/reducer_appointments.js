@@ -22,6 +22,8 @@ export default function(currentState = null, action) {
 		}
 	]
 
+	console.log(action);
+	
 	switch(action.type){
 		case 'UPDATE_APPOINTMENT':
 			let newAppointmentCollection = currentState.slice();

@@ -92,6 +92,7 @@ class SelectedAppointment extends Component {
 }
 
 function mapStateToProps(state){
+	debugger;
 	return {
 		appointment: state.selectedAppointment
 	}
